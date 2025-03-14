@@ -1,0 +1,10 @@
+server:
+  port: 8071
+spring:
+  datasource:
+    url: jdbc:mysql://172.16.1.46:3306/flex_demo?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: Tianshi@18
+  threads:
+    virtual:
+      enabled: true  #全局使用虚拟线程
