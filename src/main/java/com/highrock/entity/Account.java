@@ -1,8 +1,8 @@
 package com.highrock.entity;
 
-import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.KeyType;
-import com.mybatisflex.annotation.Table;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serial;
@@ -17,12 +17,15 @@ import java.util.Date;
  * @version: 1.0
  */
 @Data
-@Table("tb_account")
+@TableName("tb_account")
 public class Account implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Id(keyType = KeyType.Auto)
+    /**
+     * 自增id
+     */
+    @TableId(type = IdType.AUTO)
     private Long id;
     private String userName;
     private Integer age;

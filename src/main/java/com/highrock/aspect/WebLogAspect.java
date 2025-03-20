@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import com.alibaba.fastjson2.JSON;
+import com.highrock.util.JsonUtil;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -77,7 +77,7 @@ public class WebLogAspect {
     @AfterReturning(pointcut = "WebLog()", returning = "retVal")
     public void doAfterReturning( Object retVal) {
         // 处理完请求，返回内容
-        log.info("RESPONSE : {}", JSON.toJSON(retVal));
+        log.info("RESPONSE : {}", JsonUtil.toJson(retVal));
         log.info("*********************************************request end:{}***************************************************************", DateUtil.now());
 
         log.info("");

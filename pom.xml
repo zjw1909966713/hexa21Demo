@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.9</version>
+        <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.highrock</groupId>
@@ -13,19 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>hexa21</name>
     <description>Demo project for Spring Boot</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
     <properties>
         <java.version>21</java.version>
     </properties>
@@ -35,24 +22,24 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.3.9</version>
+            <version>3.3.3</version>
         </dependency>
 
         <!-- Spring Boot Starter Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>3.3.9</version>
+            <version>3.3.3</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-            <version>3.3.9</version>
+            <version>3.3.3</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.mybatis-flex</groupId>
             <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
             <version>1.10.8</version>
@@ -63,13 +50,19 @@
             <artifactId>mybatis-flex-processor</artifactId>
             <version>1.10.8</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.3.0</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <version>3.5.9</version>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -92,44 +85,36 @@
             <version>5.8.35</version>
         </dependency>
 
-        <!--fastjon2 其性能是1的两倍-->
         <dependency>
-            <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2</artifactId>
-            <version>2.0.53</version>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <version>23.1.2</version>
+            <scope>provided</scope>
         </dependency>
-
-
 
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <version>0.10.2</version>
                 <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>1.18.36</version>
-                        </path>
-                    </annotationProcessorPaths>
+                    <mainClass>com.highrock.Hexa21Application</mainClass>
+                    <buildArgs combine.children="append">
+                        <buildArg>--enable-url-protocols=http</buildArg>
+                        <buildArg>--features=com.highrock.config.LambdaRegistrationFeature</buildArg>
+                    </buildArgs>
+                    <fallback>false</fallback>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-<!--                <version>3.3.9</version>-->
+                <version>3.3.3</version>
                 <configuration>
-<!--                    <mainClass>com.highrock.Hexa21Application</mainClass>-->
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <mainClass>com.highrock.Hexa21Application</mainClass>
                 </configuration>
             </plugin>
         </plugins>

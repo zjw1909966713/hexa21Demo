@@ -1,15 +1,14 @@
 package com.highrock.controller;
 
 import cn.hutool.core.date.DateUtil;
-import com.alibaba.fastjson2.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.highrock.dto.CommonResponse;
 import com.highrock.entity.Account;
 import com.highrock.mapper.AccountMapper;
-import com.mybatisflex.core.query.QueryWrapper;
+import com.highrock.util.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,9 +54,10 @@ public class IndexController {
     @GetMapping("/account")
     public String account() {
         log.info("Current thread:{}", Thread.currentThread().getName());
-        QueryWrapper queryWrapper = QueryWrapper.create().select(Account::getUserName, Account::getAge, Account::getBirthday).where(Account::getAge).ge(500);
-        List<Account> accountList1 = accountMapper.selectListByQuery(queryWrapper);
-        return JSON.toJSONString(accountList1);
+        LambdaQueryWrapper<Account> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.select(Account::getUserName, Account::getAge, Account::getBirthday).ge(Account::getAge,800);
+        List<Account> accountList1 = accountMapper.selectList(queryWrapper);
+        return JsonUtil.toJson(accountList1);
     }
 
     @GetMapping("/vthread")

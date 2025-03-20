@@ -10,11 +10,14 @@ spring:
       max-request-size: 100MB  #上传文件总的最大值
       max-file-size: 50MB     #单个文件最大值
 logging:
-  config: classpath:logback-spring.xml
+#  config: classpath:logback-spring.xml
   file:
     path: /usr/log/${spring.profiles.active}/${spring.application.name}
   level:
     root: info
-#    com.highrock: debug
-mybatis-flex:
-  mapper-locations: classpath:/mapper/*Mapper.xml
+    com.highrock: debug
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.highrock.entity
